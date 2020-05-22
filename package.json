@@ -10,8 +10,8 @@
     "jsonlint": "^1.6.3",
     "lerna": "^3.19.0",
     "lint-staged": "^10.2.6",
-    "sort-package-json": "^1.27.0",
-    "standard": "^14.3.1"
+    "prettier": "^2.0.5",
+    "sort-package-json": "^1.27.0"
   },
   "husky": {
     "hooks": {
