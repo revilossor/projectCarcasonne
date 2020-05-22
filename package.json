@@ -1,0 +1,39 @@
+{
+  "author": "oliver.ross@hotmail.com",
+  "description": "carcasonnelike",
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/config-lerna-scopes": "^8.2.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "jsonlint": "^1.6.3",
+    "lerna": "^3.19.0",
+    "lint-staged": "^10.2.6",
+    "sort-package-json": "^1.27.0",
+    "standard": "^14.3.1"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "jest": {
+    "collectCoverage": false,
+    "restoreMocks": true
+  },
+  "license": "SEE LICENCE IN LICENCE",
+  "name": "@revilossor/carcasonnelike",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/revilossor/carcasonnelike.git"
+  },
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "test": "jest",
+    "version": "lerna version --conventional-commits --no-changelog --no-push --yes"
+  },
+  "version": "0.0.0"
+}

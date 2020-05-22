@@ -1,0 +1,12 @@
+{
+  "command": {
+    "version": {
+      "allowBranch": "master"
+    }
+  },
+  "packages": [
+    "packages/*",
+    "lib/*"
+  ],
+  "version": "0.0.0"
+}
