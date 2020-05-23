@@ -1,9 +1,9 @@
 import { getConfig, Environment, Config } from "../../src/config";
 import { ConfigurationError } from "../../src/errors";
 
-describe("Given I get a config", () => {
-  let config: Config;
+let config: Config;
 
+describe("Given I get a config", () => {
   describe("With a valid environment", () => {
     describe.each([Environment.TEST, Environment.LIVE])(
       "[%s]",
@@ -25,7 +25,7 @@ describe("Given I get a config", () => {
     );
 
     describe("And there is no json file for the environment", () => {
-      it("Then it throws a ConfigurationError", () => {
+      it("Then a ConfigurationError is thrown", () => {
         const error = new Error(
           "Cannot find module './test' from 'packages/game/src/config/index.ts'"
         );
@@ -45,7 +45,7 @@ describe("Given I get a config", () => {
   });
 
   describe("With an invalid environment", () => {
-    it("Then it throws a ConfigurationError", () => {
+    it("Then a ConfigurationError is thrown", () => {
       const environment = "the moon";
       try {
         getConfig(environment as Environment);
@@ -60,15 +60,3 @@ describe("Given I get a config", () => {
     });
   });
 });
-
-// getConfig
-//  throws if no specific file for env ( bad require )
-
-// fromEnvironment
-//  gets env from process.env, calls getConfig with it
-//  throws if key missing in env
-//  default key is DEPLOY_ENV
-//  can pass other keys...
-
-// errors
-// ConfigurationError

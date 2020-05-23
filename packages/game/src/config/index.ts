@@ -31,4 +31,11 @@ export const getConfig = (environment: Environment): Config => {
   }
 };
 
-// TODO fromEnvironment handles process.env...
+export const fromEnvironment = (key = "ENVIRONMENT") => {
+  try {
+    const environment = process.env[key] as Environment;
+    return getConfig(environment);
+  } catch (error) {
+    throw new ConfigurationError(error.message);
+  }
+};
