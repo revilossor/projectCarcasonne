@@ -1,3 +1,5 @@
+import { ConfigurationError } from "../errors";
+
 export enum Environment {
   TEST = "test",
   LIVE = "live",
@@ -10,20 +12,23 @@ export interface Config {
   height: number;
 }
 
-// TODO this could be a module....
 export const getConfig = (environment: Environment): Config => {
   if (!Object.values(Environment).includes(environment)) {
-    throw new Error("Invalid deployment environment specified");
+    throw new ConfigurationError(`"${environment}" is not a valid Environment`);
   }
 
-  const environmentSpecificConfig = require(`./${environment}`);
-  const sharedConfig = require("./shared");
+  try {
+    const specificConfig = require(`./${environment}`);
+    const sharedConfig = require("./shared");
 
-  return {
-    ...sharedConfig,
-    ...environmentSpecificConfig,
-    environment,
-  };
+    return {
+      ...sharedConfig,
+      ...specificConfig,
+      environment,
+    };
+  } catch (error) {
+    throw new ConfigurationError(error.message);
+  }
 };
 
 // TODO fromEnvironment handles process.env...
