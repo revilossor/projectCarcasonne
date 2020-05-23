@@ -1,9 +1,9 @@
 import { AUTO, Scale } from "phaser";
 import scenes from "./scenes";
 
-import { test } from "@revilossor/core";
-
-test();
+// import { test } from "@revilossor/core";
+//
+// test();
 
 new Phaser.Game({
   type: AUTO,
