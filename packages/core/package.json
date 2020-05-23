@@ -1,25 +1,22 @@
 {
   "author": "Oliver Ross <oliver.ross@hotmail.com>",
   "dependencies": {
-    "@revilossor/core": "*"
+    "parcel-bundler": "^1.12.4"
   },
-  "description": "static html hosting phaser app",
-  "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "phaser": "^3.23.0"
-  },
+  "description": "core game system",
+  "devDependencies": {},
   "homepage": "",
   "license": "SEE LICENCE IN LICENCE",
-  "name": "@revilossor/game",
+  "main": "dist/index.js",
+  "name": "@revilossor/core",
   "repository": {
     "type": "git",
     "url": "https://github.com/revilossor/projectCarcasonne.git"
   },
   "scripts": {
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.ts",
     "clean": "rm -rf dist",
-    "prestart": "npm run clean",
-    "start": "parcel src/index.html"
+    "prepare": "npm run clean && npm run build"
   },
   "version": "0.0.0"
 }
