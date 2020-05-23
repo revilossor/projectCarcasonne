@@ -13,8 +13,7 @@
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
     "sort-package-json": "^1.27.0",
-    "ts-jest": "^26.0.0",
-    "typescript": "^3.9.3"
+    "ts-jest": "^26.0.0"
   },
   "husky": {
     "hooks": {

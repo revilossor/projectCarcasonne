@@ -1,3 +1,2 @@
-export const test = () => {
-  console.log("hello world");
-};
+export { CartesianMap } from "./CartesianMap";
+export * as Tiles from "./tiles";

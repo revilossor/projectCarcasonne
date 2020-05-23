@@ -25,7 +25,7 @@ export class CartesianMap<T> {
     return this;
   }
 
-  public get(location: Location): T {
-    return this._map.get(CartesianMap.locationToHash(location));
+  public get(location: Location): T | null {
+    return this._map.get(CartesianMap.locationToHash(location)) ?? null;
   }
 }

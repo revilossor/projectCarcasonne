@@ -1,9 +1,11 @@
 import { AUTO, Scale } from "phaser";
 import scenes from "./scenes";
-
-// import { test } from "@revilossor/core";
 //
-// test();
+// import { Tiles } from "@revilossor/core";
+// //
+// // test();
+//
+// Tiles.TileEdge.ROAD
 
 new Phaser.Game({
   type: AUTO,

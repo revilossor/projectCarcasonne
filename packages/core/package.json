@@ -1,7 +1,7 @@
 {
   "author": "Oliver Ross <oliver.ross@hotmail.com>",
   "dependencies": {
-    "parcel-bundler": "^1.12.4"
+    "typescript": "^3.9.3"
   },
   "description": "core game system",
   "devDependencies": {},
@@ -14,9 +14,11 @@
     "url": "https://github.com/revilossor/projectCarcasonne.git"
   },
   "scripts": {
-    "build": "parcel build src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf dist",
-    "prepare": "npm run clean && npm run build"
+    "prebuild": "npm run clean",
+    "prepare": "npm run build"
   },
+  "typings": "dist/index.d.ts",
   "version": "0.0.0"
 }
