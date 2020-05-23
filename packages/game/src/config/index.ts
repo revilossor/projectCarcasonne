@@ -16,8 +16,8 @@ export const getConfig = (environment: Environment): Config => {
     throw new Error("Invalid deployment environment specified");
   }
 
-  const environmentSpecificConfig = require(`./${environment}.json`);
-  const sharedConfig = require("./shared.json");
+  const environmentSpecificConfig = require(`./${environment}`);
+  const sharedConfig = require("./shared");
 
   return {
     ...sharedConfig,
