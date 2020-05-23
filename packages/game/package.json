@@ -12,7 +12,7 @@
   "name": "@revilossor/game",
   "repository": {
     "type": "git",
-    "url": "https://github.com/revilossor/game.git"
+    "url": "https://github.com/revilossor/projectCarcasonne.git"
   },
   "scripts": {
     "build": "parcel build src/index.html",

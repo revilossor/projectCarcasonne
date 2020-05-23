@@ -32,7 +32,7 @@
   "name": "@revilossor/carcasonnelike",
   "repository": {
     "type": "git",
-    "url": "https://github.com/revilossor/carcasonnelike.git"
+    "url": "https://github.com/revilossor/projectCarcasonne.git"
   },
   "scripts": {
     "postinstall": "lerna bootstrap",
