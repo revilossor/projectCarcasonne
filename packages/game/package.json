@@ -4,8 +4,7 @@
   "description": "static html hosting phaser app",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
-    "phaser": "^3.23.0",
-    "typescript": "^3.9.3"
+    "phaser": "^3.23.0"
   },
   "homepage": "",
   "license": "SEE LICENCE IN LICENCE",

@@ -5,13 +5,16 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@commitlint/config-lerna-scopes": "^8.2.0",
+    "@types/jest": "^25.2.3",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jsonlint": "^1.6.3",
     "lerna": "^3.19.0",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
-    "sort-package-json": "^1.27.0"
+    "sort-package-json": "^1.27.0",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.3"
   },
   "husky": {
     "hooks": {
@@ -22,6 +25,7 @@
   },
   "jest": {
     "collectCoverage": false,
+    "preset": "ts-jest",
     "restoreMocks": true
   },
   "license": "SEE LICENCE IN LICENCE",
@@ -32,6 +36,7 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "start": "npm --prefix packages/game start",
     "test": "jest",
     "version": "lerna version --conventional-commits --no-changelog --no-push --yes"
   },
