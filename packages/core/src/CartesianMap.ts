@@ -31,6 +31,10 @@ export class CartesianMap<T> {
     return list;
   }
 
+  public map<K>(handler: (location: Location, item: T) => K): K[] {
+    return this.all.map(([location, item]) => handler(location, item));
+  }
+
   private static locationToHash(location: Location): HashedLocation {
     return JSON.stringify(location);
   }
