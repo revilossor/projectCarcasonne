@@ -14,47 +14,32 @@ export class TileMap extends CartesianMap<Tile> {
   }
 
   public getOpenLocations(): OpenLocation[] {
-    const a = this.all;
-    const b = a.reduce(
+    const addOpenLocation = (
+      list: OpenLocation[],
+      tuple: [Location, Tile | null]
+    ) => {
+      if (tuple[1] === null) {
+        list.push({
+          ...tuple[0],
+          neighbours: this.getNeighbours(tuple[0]),
+        });
+      }
+    };
+
+    return this.all.reduce(
       (
         openLocations: OpenLocation[],
         [location]: [Location, Tile]
       ): OpenLocation[] => {
         const neighbours = this.getNeighbours(location);
-        if (neighbours.top[1] === null) {
-          // ie, there is no tile there
-          openLocations.push({
-            ...neighbours.top[0],
-            neighbours: this.getNeighbours(neighbours.top[0]),
-          });
-        }
-        if (neighbours.right[1] === null) {
-          // TODO refactor me ! DRY
-          openLocations.push({
-            ...neighbours.right[0],
-            neighbours: this.getNeighbours(neighbours.right[0]),
-          });
-        }
-        if (neighbours.bottom[1] === null) {
-          // TODO refactor me ! DRY
-          openLocations.push({
-            ...neighbours.bottom[0],
-            neighbours: this.getNeighbours(neighbours.bottom[0]),
-          });
-        }
-        if (neighbours.left[1] === null) {
-          // TODO refactor me ! DRY
-          openLocations.push({
-            ...neighbours.left[0],
-            neighbours: this.getNeighbours(neighbours.left[0]),
-          });
-        }
+        addOpenLocation(openLocations, neighbours.top);
+        addOpenLocation(openLocations, neighbours.right);
+        addOpenLocation(openLocations, neighbours.bottom);
+        addOpenLocation(openLocations, neighbours.left);
         return openLocations;
       },
       []
     );
-
-    return b;
   }
 
   private static getNeighbourLocations({
