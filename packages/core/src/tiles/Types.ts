@@ -7,9 +7,9 @@ export enum TileEdge {
 
 export interface Proximity<T> {
   top: T;
+  right: T;
   bottom: T;
   left: T;
-  right: T;
 }
 
 export interface Tile extends Proximity<TileEdge> {

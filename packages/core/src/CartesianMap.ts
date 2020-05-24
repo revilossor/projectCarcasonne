@@ -6,6 +6,7 @@ interface Location {
 type HashedLocation = string;
 
 export class CartesianMap<T> {
+  [x: string]: any;
   private _map!: Map<HashedLocation, T>;
 
   constructor() {
@@ -20,6 +21,14 @@ export class CartesianMap<T> {
 
   public get(location: Location): T | null {
     return this._map.get(CartesianMap.locationToHash(location)) ?? null;
+  }
+
+  public get all(): [Location, T][] {
+    const list = new Array<[Location, T]>();
+    this._map.forEach((value: T, hash: HashedLocation) => {
+      list.push([CartesianMap.locationFromHash(hash), value]);
+    });
+    return list;
   }
 
   private static locationToHash(location: Location): HashedLocation {
