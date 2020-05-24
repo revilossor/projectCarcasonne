@@ -1,4 +1,4 @@
-import { Location, HashedLocation } from "./tiles/Types";
+import { Location, HashedLocation } from "./Types";
 
 export class CartesianMap<T> {
   [x: string]: any;

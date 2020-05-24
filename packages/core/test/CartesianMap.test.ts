@@ -1,4 +1,4 @@
-import { CartesianMap } from "../src/CartesianMap";
+import { CartesianMap } from "../src";
 
 interface Thing {
   name: string;

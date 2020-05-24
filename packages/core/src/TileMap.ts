@@ -9,7 +9,7 @@ import {
   Direction,
   TileEdge,
   FittingLocation,
-} from "./tiles";
+} from "./Types";
 
 export class TileMap extends CartesianMap<Tile> {
   public getNeighbours(location: Location): Neighbours {

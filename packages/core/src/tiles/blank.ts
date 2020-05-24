@@ -1,4 +1,4 @@
-import { TileEdge } from "./Types";
+import { TileEdge } from "../Types";
 
 export const blank = {
   top: TileEdge.EMPTY,

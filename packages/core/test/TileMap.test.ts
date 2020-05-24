@@ -1,12 +1,4 @@
-import { TileMap } from "../src/TileMap";
-import {
-  blank,
-  Tile,
-  TileEdge,
-  Location,
-  Proximity,
-  Orientation,
-} from "../src/tiles";
+import { TileMap, Tiles, Types } from "../src";
 
 let map: TileMap;
 
@@ -20,7 +12,7 @@ describe("Given I have no items set", () => {
   });
 
   it("And I get fitting locations for a tile, an empty list is returned", () => {
-    expect(map.getFittingLocations(blank)).toEqual([]);
+    expect(map.getFittingLocations(Tiles.blank)).toEqual([]);
   });
 });
 
@@ -36,7 +28,10 @@ describe("Given I have several items set", () => {
     positive y is down!
    */
 
-  const getNeighbourLocations = ({ x, y }: Location): Proximity<Location> => {
+  const getNeighbourLocations = ({
+    x,
+    y,
+  }: Types.Location): Types.Proximity<Types.Location> => {
     // assume all locations are integers, and positive y is down...
     return {
       top: { x, y: y - 1 },
@@ -46,10 +41,10 @@ describe("Given I have several items set", () => {
     };
   };
 
-  const items: Tile[] = [
-    { ...blank, monastary: true },
-    blank,
-    { ...blank, bottom: TileEdge.ROAD, right: TileEdge.ROAD },
+  const items: Types.Tile[] = [
+    { ...Tiles.blank, monastary: true },
+    Tiles.blank,
+    { ...Tiles.blank, bottom: Types.TileEdge.ROAD, right: Types.TileEdge.ROAD },
   ];
 
   beforeEach(() => {
@@ -188,7 +183,7 @@ describe("Given I have several items set", () => {
 
   describe("And I get fitting locations for a tile", () => {
     describe("And the tile fits in lots of places", () => {
-      it("When there are fitting locations, the correct list is returned", () => {
+      it("Then the correct list is returned", () => {
         const expectedFittingLocations = [
           { x: 0, y: -1 },
           { x: -1, y: 0 },
@@ -201,7 +196,7 @@ describe("Given I have several items set", () => {
           getNeighbourLocations
         );
 
-        const result = map.getFittingLocations(blank);
+        const result = map.getFittingLocations(Tiles.blank);
         expect(result).toHaveLength(24);
         expect(result).toEqual(
           expect.arrayContaining([
@@ -213,7 +208,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[0].bottom, items[0]],
                 left: [expectedNeighbourLocations[0].left, null],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[0],
@@ -223,7 +218,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[0].bottom, items[0]],
                 left: [expectedNeighbourLocations[0].left, null],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[0],
@@ -233,7 +228,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[0].bottom, items[0]],
                 left: [expectedNeighbourLocations[0].left, null],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
             {
               ...expectedFittingLocations[0],
@@ -243,7 +238,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[0].bottom, items[0]],
                 left: [expectedNeighbourLocations[0].left, null],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
             {
               ...expectedFittingLocations[1],
@@ -253,7 +248,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[1].bottom, null],
                 left: [expectedNeighbourLocations[1].left, null],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[1],
@@ -263,7 +258,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[1].bottom, null],
                 left: [expectedNeighbourLocations[1].left, null],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[1],
@@ -273,7 +268,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[1].bottom, null],
                 left: [expectedNeighbourLocations[1].left, null],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
             {
               ...expectedFittingLocations[1],
@@ -283,7 +278,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[1].bottom, null],
                 left: [expectedNeighbourLocations[1].left, null],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
             {
               ...expectedFittingLocations[2],
@@ -293,7 +288,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[2].bottom, null],
                 left: [expectedNeighbourLocations[2].left, null],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[2],
@@ -303,7 +298,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[2].bottom, null],
                 left: [expectedNeighbourLocations[2].left, null],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[2],
@@ -313,7 +308,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[2].bottom, null],
                 left: [expectedNeighbourLocations[2].left, null],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
             {
               ...expectedFittingLocations[2],
@@ -323,7 +318,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[2].bottom, null],
                 left: [expectedNeighbourLocations[2].left, null],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
             {
               ...expectedFittingLocations[3],
@@ -333,7 +328,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[3].bottom, null],
                 left: [expectedNeighbourLocations[3].left, null],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[3],
@@ -343,7 +338,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[3].bottom, null],
                 left: [expectedNeighbourLocations[3].left, null],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[3],
@@ -353,7 +348,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[3].bottom, null],
                 left: [expectedNeighbourLocations[3].left, null],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
             {
               ...expectedFittingLocations[3],
@@ -363,7 +358,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[3].bottom, null],
                 left: [expectedNeighbourLocations[3].left, null],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
             {
               ...expectedFittingLocations[4],
@@ -373,7 +368,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[4].bottom, null],
                 left: [expectedNeighbourLocations[4].left, items[0]],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[4],
@@ -383,7 +378,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[4].bottom, null],
                 left: [expectedNeighbourLocations[4].left, items[0]],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[4],
@@ -393,7 +388,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[4].bottom, null],
                 left: [expectedNeighbourLocations[4].left, items[0]],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
             {
               ...expectedFittingLocations[4],
@@ -403,7 +398,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[4].bottom, null],
                 left: [expectedNeighbourLocations[4].left, items[0]],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
             {
               ...expectedFittingLocations[5],
@@ -413,7 +408,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[5].bottom, null],
                 left: [expectedNeighbourLocations[5].left, items[1]],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[5],
@@ -423,7 +418,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[5].bottom, null],
                 left: [expectedNeighbourLocations[5].left, items[1]],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[5],
@@ -433,7 +428,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[5].bottom, null],
                 left: [expectedNeighbourLocations[5].left, items[1]],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
             {
               ...expectedFittingLocations[5],
@@ -443,24 +438,14 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[5].bottom, null],
                 left: [expectedNeighbourLocations[5].left, items[1]],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
           ])
         );
       });
-      it("When there are no fitting locations, an empty list is returned", () => {
-        const tile = {
-          top: TileEdge.BUILDING,
-          right: TileEdge.BUILDING,
-          bottom: TileEdge.BUILDING,
-          left: TileEdge.BUILDING,
-          monastary: false,
-        };
-        expect(map.getFittingLocations(tile)).toEqual([]);
-      });
     });
     describe("And the tile fits in a few places", () => {
-      it("When there are fitting locations, the correct list is returned", () => {
+      it("Then the correct list is returned", () => {
         const expectedFittingLocations = [
           { x: 0, y: 3 },
           { x: 1, y: 2 },
@@ -469,11 +454,11 @@ describe("Given I have several items set", () => {
           getNeighbourLocations
         );
         const roadTile = {
-          ...blank,
-          top: TileEdge.BUILDING,
-          right: TileEdge.ROAD,
-          bottom: TileEdge.BUILDING,
-          left: TileEdge.ROAD,
+          top: Types.TileEdge.BUILDING,
+          right: Types.TileEdge.ROAD,
+          bottom: Types.TileEdge.BUILDING,
+          left: Types.TileEdge.ROAD,
+          monastary: false,
         };
 
         const result = map.getFittingLocations(roadTile);
@@ -488,7 +473,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[0].bottom, null],
                 left: [expectedNeighbourLocations[0].left, null],
               },
-              orientation: Orientation.EAST,
+              orientation: Types.Orientation.EAST,
             },
             {
               ...expectedFittingLocations[0],
@@ -498,7 +483,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[0].bottom, null],
                 left: [expectedNeighbourLocations[0].left, null],
               },
-              orientation: Orientation.WEST,
+              orientation: Types.Orientation.WEST,
             },
             {
               ...expectedFittingLocations[1],
@@ -508,7 +493,7 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[1].bottom, null],
                 left: [expectedNeighbourLocations[1].left, items[2]],
               },
-              orientation: Orientation.NORTH,
+              orientation: Types.Orientation.NORTH,
             },
             {
               ...expectedFittingLocations[1],
@@ -518,32 +503,24 @@ describe("Given I have several items set", () => {
                 bottom: [expectedNeighbourLocations[1].bottom, null],
                 left: [expectedNeighbourLocations[1].left, items[2]],
               },
-              orientation: Orientation.SOUTH,
+              orientation: Types.Orientation.SOUTH,
             },
           ])
         );
       });
-      it("When there are no fitting locations, an empty list is returned", () => {
-        const tile = {
-          top: TileEdge.BUILDING,
-          right: TileEdge.BUILDING,
-          bottom: TileEdge.BUILDING,
-          left: TileEdge.BUILDING,
-          monastary: false,
-        };
-        expect(map.getFittingLocations(tile)).toEqual([]);
-      });
     });
-    it("And the tile fits in no places, an empty list is returned", () => {
-      expect(
-        map.getFittingLocations({
-          ...blank,
-          top: TileEdge.BUILDING,
-          right: TileEdge.BUILDING,
-          bottom: TileEdge.BUILDING,
-          left: TileEdge.BUILDING,
-        })
-      ).toEqual([]);
+    describe("And the tile fits in no places", () => {
+      it("Then an empty list is returned", () => {
+        expect(
+          map.getFittingLocations({
+            top: Types.TileEdge.BUILDING,
+            right: Types.TileEdge.BUILDING,
+            bottom: Types.TileEdge.BUILDING,
+            left: Types.TileEdge.BUILDING,
+            monastary: false,
+          })
+        ).toEqual([]);
+      });
     });
   });
 
@@ -560,7 +537,7 @@ describe("Given I have several items set", () => {
      */
 
     beforeEach(() => {
-      map.set(newLocation, blank);
+      map.set(newLocation, Tiles.blank);
     });
 
     it("When I get the neighbours of the newly populated location, the correct list is returned", () => {
@@ -630,7 +607,7 @@ describe("Given I have several items set", () => {
             neighbours: {
               top: [expectedNeighbourLocations[4].top, null],
               right: [expectedNeighbourLocations[4].right, null],
-              bottom: [expectedNeighbourLocations[4].bottom, blank],
+              bottom: [expectedNeighbourLocations[4].bottom, Tiles.blank],
               left: [expectedNeighbourLocations[4].left, items[0]],
             },
           },
@@ -646,7 +623,7 @@ describe("Given I have several items set", () => {
           {
             ...expectedOpenPositions[6],
             neighbours: {
-              top: [expectedNeighbourLocations[6].top, blank],
+              top: [expectedNeighbourLocations[6].top, Tiles.blank],
               right: [expectedNeighbourLocations[6].right, null],
               bottom: [expectedNeighbourLocations[6].bottom, null],
               left: [expectedNeighbourLocations[6].left, items[2]],
