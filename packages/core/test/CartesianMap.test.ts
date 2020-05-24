@@ -85,7 +85,7 @@ describe("Given I have several items set", () => {
         expect(passedFunction).toHaveBeenCalledWith(location, item);
       });
     });
-    it("And a list of each executions results is returned", () => {
+    it("And a list of each executions result is returned", () => {
       expect(result).toEqual(["tom", "dick", "harry"]);
     });
   });
