@@ -1,9 +1,4 @@
-interface Location {
-  x: number;
-  y: number;
-}
-
-type HashedLocation = string;
+import { Location, HashedLocation } from "./tiles/Types";
 
 export class CartesianMap<T> {
   [x: string]: any;
@@ -15,6 +10,7 @@ export class CartesianMap<T> {
   }
 
   public set(location: Location, value: T): CartesianMap<T> {
+    // TODO enforce integer locations...
     this._map.set(CartesianMap.locationToHash(location), value);
     return this;
   }

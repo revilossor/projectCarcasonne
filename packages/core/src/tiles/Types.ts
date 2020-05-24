@@ -16,4 +16,15 @@ export interface Tile extends Proximity<TileEdge> {
   monastary: boolean;
 }
 
-export interface Neighbours extends Proximity<Tile> {}
+export interface Neighbours extends Proximity<[Location, Tile | null]> {}
+
+export interface Location {
+  x: number;
+  y: number;
+}
+
+export type HashedLocation = string;
+
+export interface OpenLocation extends Location {
+  neighbours: Neighbours;
+}
