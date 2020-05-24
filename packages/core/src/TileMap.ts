@@ -6,6 +6,9 @@ import {
   OpenLocation,
   Proximity,
   Orientation,
+  Direction,
+  TileEdge,
+  FittingLocation,
 } from "./tiles";
 
 export class TileMap extends CartesianMap<Tile> {
@@ -20,32 +23,42 @@ export class TileMap extends CartesianMap<Tile> {
     };
   }
 
-  // TODO get the list of openLocations where a particular tile can be placed...
-  // checkFit(location, tile, orientation): boolean
-  /**
-      for tile
-        for each open position
-          check if fits, in each of the 4 orientations
-            if an orientation fits this open location
-              add to list
-      return list
-   */
+  public getFittingLocations(tile: Tile): FittingLocation[] {
+    const addFittingLocation = (
+      fittingLocations: FittingLocation[],
+      openLocation: OpenLocation,
+      tile: Tile,
+      orientation: Orientation
+    ) => {
+      if (
+        TileMap.checkFit(
+          TileMap.rotateTile(tile, orientation),
+          this.getNeighbours({ x: openLocation.x, y: openLocation.y })
+        )
+      ) {
+        fittingLocations.push({ ...openLocation, orientation: orientation });
+      }
+    };
 
-  public checkFit(
-    location: Location,
-    tile: Tile,
-    orientation: Orientation = Orientation.NORTH
-  ): boolean {
-    /**
-      rotate the tile to orientation      // rotate(Tile, orientation):Tile
-      getNeighbours for location
-      for each rotated tile edge      // validateEdge(Tile, neighbours, orientation): boolean
-        check if tile edge valid connection with correcponding neighbour edge
-      if each tile edge valid
-        return true
-      return false
-     */
-    return false;
+    return this.getOpenLocations().reduce(
+      (
+        fittingLocations: FittingLocation[],
+        openLocation: OpenLocation
+      ): FittingLocation[] => {
+        const addFittingLocationToList = addFittingLocation.bind(
+          this,
+          fittingLocations,
+          openLocation,
+          tile
+        );
+        addFittingLocationToList(Orientation.NORTH);
+        addFittingLocationToList(Orientation.EAST);
+        addFittingLocationToList(Orientation.SOUTH);
+        addFittingLocationToList(Orientation.WEST);
+        return fittingLocations;
+      },
+      []
+    );
   }
 
   public getOpenLocations(): OpenLocation[] {
@@ -119,5 +132,50 @@ export class TileMap extends CartesianMap<Tile> {
       default:
         return tile;
     }
+  }
+
+  private static getCorrespondingEdge(
+    neighbours: Neighbours,
+    direction: Direction
+  ): TileEdge {
+    switch (direction) {
+      case Direction.TOP:
+        return neighbours?.top[1]?.bottom ?? TileEdge.UNOCCUPIED;
+      case Direction.RIGHT:
+        return neighbours?.right[1]?.left ?? TileEdge.UNOCCUPIED;
+      case Direction.BOTTOM:
+        return neighbours?.bottom[1]?.top ?? TileEdge.UNOCCUPIED;
+      case Direction.LEFT:
+        return neighbours?.left[1]?.right ?? TileEdge.UNOCCUPIED;
+    }
+  }
+
+  private static tileMatchesInDirection(
+    tile: Tile,
+    neighbours: Neighbours,
+    direction: Direction
+  ): boolean {
+    const correspondingEdge = TileMap.getCorrespondingEdge(
+      neighbours,
+      direction
+    );
+    return (
+      correspondingEdge === TileEdge.UNOCCUPIED ||
+      tile[direction] === correspondingEdge
+    );
+  }
+
+  private static checkFit(tile: Tile, neighbours: Neighbours): boolean {
+    const thisMatchesInDirection = TileMap.tileMatchesInDirection.bind(
+      null,
+      tile,
+      neighbours
+    );
+    return (
+      thisMatchesInDirection(Direction.TOP) &&
+      thisMatchesInDirection(Direction.RIGHT) &&
+      thisMatchesInDirection(Direction.BOTTOM) &&
+      thisMatchesInDirection(Direction.LEFT)
+    );
   }
 }

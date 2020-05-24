@@ -29,9 +29,20 @@ export interface OpenLocation extends Location {
   neighbours: Neighbours;
 }
 
+export interface FittingLocation extends OpenLocation {
+  orientation: Orientation;
+}
+
 export enum Orientation {
   NORTH = "north",
   EAST = "east",
   SOUTH = "south",
   WEST = "west",
+}
+
+export enum Direction {
+  TOP = "top",
+  RIGHT = "right",
+  BOTTOM = "bottom",
+  LEFT = "left",
 }
