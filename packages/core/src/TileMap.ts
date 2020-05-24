@@ -36,7 +36,7 @@ export class TileMap extends CartesianMap<Tile> {
           this.getNeighbours({ x: openLocation.x, y: openLocation.y })
         )
       ) {
-        fittingLocations.push({ ...openLocation, orientation: orientation });
+        fittingLocations.push({ ...openLocation, orientation });
       }
     };
 

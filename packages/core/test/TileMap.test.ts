@@ -19,7 +19,7 @@ describe("Given I have no items set", () => {
     expect(map.getOpenLocations()).toEqual([]);
   });
 
-  it("Given I get fitting locations for a tile, an empty list is returned", () => {
+  it("And I get fitting locations for a tile, an empty list is returned", () => {
     expect(map.getFittingLocations(blank)).toEqual([]);
   });
 });
@@ -186,277 +186,364 @@ describe("Given I have several items set", () => {
     );
   });
 
-  describe("Given I get fitting locations for a tile", () => {
-    it("When there are fitting locations, the correct list is returned", () => {
-      // TODO test for a road...
-      const expectedFittingLocations = [
-        { x: 0, y: -1 },
-        { x: -1, y: 0 },
-        { x: -1, y: 1 },
-        { x: -1, y: 2 },
-        { x: 1, y: 0 },
-        { x: 1, y: 1 },
-      ];
-      const expectedNeighbourLocations = expectedFittingLocations.map(
-        getNeighbourLocations
-      );
+  describe("And I get fitting locations for a tile", () => {
+    describe("And the tile fits in lots of places", () => {
+      it("When there are fitting locations, the correct list is returned", () => {
+        const expectedFittingLocations = [
+          { x: 0, y: -1 },
+          { x: -1, y: 0 },
+          { x: -1, y: 1 },
+          { x: -1, y: 2 },
+          { x: 1, y: 0 },
+          { x: 1, y: 1 },
+        ];
+        const expectedNeighbourLocations = expectedFittingLocations.map(
+          getNeighbourLocations
+        );
 
-      const result = map.getFittingLocations(blank);
-      expect(result).toHaveLength(24);
-      expect(result).toEqual(
-        expect.arrayContaining([
-          {
-            ...expectedFittingLocations[0],
-            neighbours: {
-              top: [expectedNeighbourLocations[0].top, null],
-              right: [expectedNeighbourLocations[0].right, null],
-              bottom: [expectedNeighbourLocations[0].bottom, items[0]],
-              left: [expectedNeighbourLocations[0].left, null],
+        const result = map.getFittingLocations(blank);
+        expect(result).toHaveLength(24);
+        expect(result).toEqual(
+          expect.arrayContaining([
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, null],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, items[0]],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Orientation.NORTH,
             },
-            orientation: Orientation.NORTH,
-          },
-          {
-            ...expectedFittingLocations[0],
-            neighbours: {
-              top: [expectedNeighbourLocations[0].top, null],
-              right: [expectedNeighbourLocations[0].right, null],
-              bottom: [expectedNeighbourLocations[0].bottom, items[0]],
-              left: [expectedNeighbourLocations[0].left, null],
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, null],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, items[0]],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Orientation.EAST,
             },
-            orientation: Orientation.EAST,
-          },
-          {
-            ...expectedFittingLocations[0],
-            neighbours: {
-              top: [expectedNeighbourLocations[0].top, null],
-              right: [expectedNeighbourLocations[0].right, null],
-              bottom: [expectedNeighbourLocations[0].bottom, items[0]],
-              left: [expectedNeighbourLocations[0].left, null],
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, null],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, items[0]],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Orientation.SOUTH,
             },
-            orientation: Orientation.SOUTH,
-          },
-          {
-            ...expectedFittingLocations[0],
-            neighbours: {
-              top: [expectedNeighbourLocations[0].top, null],
-              right: [expectedNeighbourLocations[0].right, null],
-              bottom: [expectedNeighbourLocations[0].bottom, items[0]],
-              left: [expectedNeighbourLocations[0].left, null],
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, null],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, items[0]],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Orientation.WEST,
             },
-            orientation: Orientation.WEST,
-          },
-          {
-            ...expectedFittingLocations[1],
-            neighbours: {
-              top: [expectedNeighbourLocations[1].top, null],
-              right: [expectedNeighbourLocations[1].right, items[0]],
-              bottom: [expectedNeighbourLocations[1].bottom, null],
-              left: [expectedNeighbourLocations[1].left, null],
+            {
+              ...expectedFittingLocations[1],
+              neighbours: {
+                top: [expectedNeighbourLocations[1].top, null],
+                right: [expectedNeighbourLocations[1].right, items[0]],
+                bottom: [expectedNeighbourLocations[1].bottom, null],
+                left: [expectedNeighbourLocations[1].left, null],
+              },
+              orientation: Orientation.NORTH,
             },
-            orientation: Orientation.NORTH,
-          },
-          {
-            ...expectedFittingLocations[1],
-            neighbours: {
-              top: [expectedNeighbourLocations[1].top, null],
-              right: [expectedNeighbourLocations[1].right, items[0]],
-              bottom: [expectedNeighbourLocations[1].bottom, null],
-              left: [expectedNeighbourLocations[1].left, null],
+            {
+              ...expectedFittingLocations[1],
+              neighbours: {
+                top: [expectedNeighbourLocations[1].top, null],
+                right: [expectedNeighbourLocations[1].right, items[0]],
+                bottom: [expectedNeighbourLocations[1].bottom, null],
+                left: [expectedNeighbourLocations[1].left, null],
+              },
+              orientation: Orientation.EAST,
             },
-            orientation: Orientation.EAST,
-          },
-          {
-            ...expectedFittingLocations[1],
-            neighbours: {
-              top: [expectedNeighbourLocations[1].top, null],
-              right: [expectedNeighbourLocations[1].right, items[0]],
-              bottom: [expectedNeighbourLocations[1].bottom, null],
-              left: [expectedNeighbourLocations[1].left, null],
+            {
+              ...expectedFittingLocations[1],
+              neighbours: {
+                top: [expectedNeighbourLocations[1].top, null],
+                right: [expectedNeighbourLocations[1].right, items[0]],
+                bottom: [expectedNeighbourLocations[1].bottom, null],
+                left: [expectedNeighbourLocations[1].left, null],
+              },
+              orientation: Orientation.SOUTH,
             },
-            orientation: Orientation.SOUTH,
-          },
-          {
-            ...expectedFittingLocations[1],
-            neighbours: {
-              top: [expectedNeighbourLocations[1].top, null],
-              right: [expectedNeighbourLocations[1].right, items[0]],
-              bottom: [expectedNeighbourLocations[1].bottom, null],
-              left: [expectedNeighbourLocations[1].left, null],
+            {
+              ...expectedFittingLocations[1],
+              neighbours: {
+                top: [expectedNeighbourLocations[1].top, null],
+                right: [expectedNeighbourLocations[1].right, items[0]],
+                bottom: [expectedNeighbourLocations[1].bottom, null],
+                left: [expectedNeighbourLocations[1].left, null],
+              },
+              orientation: Orientation.WEST,
             },
-            orientation: Orientation.WEST,
-          },
-          {
-            ...expectedFittingLocations[2],
-            neighbours: {
-              top: [expectedNeighbourLocations[2].top, null],
-              right: [expectedNeighbourLocations[2].right, items[1]],
-              bottom: [expectedNeighbourLocations[2].bottom, null],
-              left: [expectedNeighbourLocations[2].left, null],
+            {
+              ...expectedFittingLocations[2],
+              neighbours: {
+                top: [expectedNeighbourLocations[2].top, null],
+                right: [expectedNeighbourLocations[2].right, items[1]],
+                bottom: [expectedNeighbourLocations[2].bottom, null],
+                left: [expectedNeighbourLocations[2].left, null],
+              },
+              orientation: Orientation.NORTH,
             },
-            orientation: Orientation.NORTH,
-          },
-          {
-            ...expectedFittingLocations[2],
-            neighbours: {
-              top: [expectedNeighbourLocations[2].top, null],
-              right: [expectedNeighbourLocations[2].right, items[1]],
-              bottom: [expectedNeighbourLocations[2].bottom, null],
-              left: [expectedNeighbourLocations[2].left, null],
+            {
+              ...expectedFittingLocations[2],
+              neighbours: {
+                top: [expectedNeighbourLocations[2].top, null],
+                right: [expectedNeighbourLocations[2].right, items[1]],
+                bottom: [expectedNeighbourLocations[2].bottom, null],
+                left: [expectedNeighbourLocations[2].left, null],
+              },
+              orientation: Orientation.EAST,
             },
-            orientation: Orientation.EAST,
-          },
-          {
-            ...expectedFittingLocations[2],
-            neighbours: {
-              top: [expectedNeighbourLocations[2].top, null],
-              right: [expectedNeighbourLocations[2].right, items[1]],
-              bottom: [expectedNeighbourLocations[2].bottom, null],
-              left: [expectedNeighbourLocations[2].left, null],
+            {
+              ...expectedFittingLocations[2],
+              neighbours: {
+                top: [expectedNeighbourLocations[2].top, null],
+                right: [expectedNeighbourLocations[2].right, items[1]],
+                bottom: [expectedNeighbourLocations[2].bottom, null],
+                left: [expectedNeighbourLocations[2].left, null],
+              },
+              orientation: Orientation.SOUTH,
             },
-            orientation: Orientation.SOUTH,
-          },
-          {
-            ...expectedFittingLocations[2],
-            neighbours: {
-              top: [expectedNeighbourLocations[2].top, null],
-              right: [expectedNeighbourLocations[2].right, items[1]],
-              bottom: [expectedNeighbourLocations[2].bottom, null],
-              left: [expectedNeighbourLocations[2].left, null],
+            {
+              ...expectedFittingLocations[2],
+              neighbours: {
+                top: [expectedNeighbourLocations[2].top, null],
+                right: [expectedNeighbourLocations[2].right, items[1]],
+                bottom: [expectedNeighbourLocations[2].bottom, null],
+                left: [expectedNeighbourLocations[2].left, null],
+              },
+              orientation: Orientation.WEST,
             },
-            orientation: Orientation.WEST,
-          },
-          {
-            ...expectedFittingLocations[3],
-            neighbours: {
-              top: [expectedNeighbourLocations[3].top, null],
-              right: [expectedNeighbourLocations[3].right, items[2]],
-              bottom: [expectedNeighbourLocations[3].bottom, null],
-              left: [expectedNeighbourLocations[3].left, null],
+            {
+              ...expectedFittingLocations[3],
+              neighbours: {
+                top: [expectedNeighbourLocations[3].top, null],
+                right: [expectedNeighbourLocations[3].right, items[2]],
+                bottom: [expectedNeighbourLocations[3].bottom, null],
+                left: [expectedNeighbourLocations[3].left, null],
+              },
+              orientation: Orientation.NORTH,
             },
-            orientation: Orientation.NORTH,
-          },
-          {
-            ...expectedFittingLocations[3],
-            neighbours: {
-              top: [expectedNeighbourLocations[3].top, null],
-              right: [expectedNeighbourLocations[3].right, items[2]],
-              bottom: [expectedNeighbourLocations[3].bottom, null],
-              left: [expectedNeighbourLocations[3].left, null],
+            {
+              ...expectedFittingLocations[3],
+              neighbours: {
+                top: [expectedNeighbourLocations[3].top, null],
+                right: [expectedNeighbourLocations[3].right, items[2]],
+                bottom: [expectedNeighbourLocations[3].bottom, null],
+                left: [expectedNeighbourLocations[3].left, null],
+              },
+              orientation: Orientation.EAST,
             },
-            orientation: Orientation.EAST,
-          },
-          {
-            ...expectedFittingLocations[3],
-            neighbours: {
-              top: [expectedNeighbourLocations[3].top, null],
-              right: [expectedNeighbourLocations[3].right, items[2]],
-              bottom: [expectedNeighbourLocations[3].bottom, null],
-              left: [expectedNeighbourLocations[3].left, null],
+            {
+              ...expectedFittingLocations[3],
+              neighbours: {
+                top: [expectedNeighbourLocations[3].top, null],
+                right: [expectedNeighbourLocations[3].right, items[2]],
+                bottom: [expectedNeighbourLocations[3].bottom, null],
+                left: [expectedNeighbourLocations[3].left, null],
+              },
+              orientation: Orientation.SOUTH,
             },
-            orientation: Orientation.SOUTH,
-          },
-          {
-            ...expectedFittingLocations[3],
-            neighbours: {
-              top: [expectedNeighbourLocations[3].top, null],
-              right: [expectedNeighbourLocations[3].right, items[2]],
-              bottom: [expectedNeighbourLocations[3].bottom, null],
-              left: [expectedNeighbourLocations[3].left, null],
+            {
+              ...expectedFittingLocations[3],
+              neighbours: {
+                top: [expectedNeighbourLocations[3].top, null],
+                right: [expectedNeighbourLocations[3].right, items[2]],
+                bottom: [expectedNeighbourLocations[3].bottom, null],
+                left: [expectedNeighbourLocations[3].left, null],
+              },
+              orientation: Orientation.WEST,
             },
-            orientation: Orientation.WEST,
-          },
-          {
-            ...expectedFittingLocations[4],
-            neighbours: {
-              top: [expectedNeighbourLocations[4].top, null],
-              right: [expectedNeighbourLocations[4].right, null],
-              bottom: [expectedNeighbourLocations[4].bottom, null],
-              left: [expectedNeighbourLocations[4].left, items[0]],
+            {
+              ...expectedFittingLocations[4],
+              neighbours: {
+                top: [expectedNeighbourLocations[4].top, null],
+                right: [expectedNeighbourLocations[4].right, null],
+                bottom: [expectedNeighbourLocations[4].bottom, null],
+                left: [expectedNeighbourLocations[4].left, items[0]],
+              },
+              orientation: Orientation.NORTH,
             },
-            orientation: Orientation.NORTH,
-          },
-          {
-            ...expectedFittingLocations[4],
-            neighbours: {
-              top: [expectedNeighbourLocations[4].top, null],
-              right: [expectedNeighbourLocations[4].right, null],
-              bottom: [expectedNeighbourLocations[4].bottom, null],
-              left: [expectedNeighbourLocations[4].left, items[0]],
+            {
+              ...expectedFittingLocations[4],
+              neighbours: {
+                top: [expectedNeighbourLocations[4].top, null],
+                right: [expectedNeighbourLocations[4].right, null],
+                bottom: [expectedNeighbourLocations[4].bottom, null],
+                left: [expectedNeighbourLocations[4].left, items[0]],
+              },
+              orientation: Orientation.EAST,
             },
-            orientation: Orientation.EAST,
-          },
-          {
-            ...expectedFittingLocations[4],
-            neighbours: {
-              top: [expectedNeighbourLocations[4].top, null],
-              right: [expectedNeighbourLocations[4].right, null],
-              bottom: [expectedNeighbourLocations[4].bottom, null],
-              left: [expectedNeighbourLocations[4].left, items[0]],
+            {
+              ...expectedFittingLocations[4],
+              neighbours: {
+                top: [expectedNeighbourLocations[4].top, null],
+                right: [expectedNeighbourLocations[4].right, null],
+                bottom: [expectedNeighbourLocations[4].bottom, null],
+                left: [expectedNeighbourLocations[4].left, items[0]],
+              },
+              orientation: Orientation.SOUTH,
             },
-            orientation: Orientation.SOUTH,
-          },
-          {
-            ...expectedFittingLocations[4],
-            neighbours: {
-              top: [expectedNeighbourLocations[4].top, null],
-              right: [expectedNeighbourLocations[4].right, null],
-              bottom: [expectedNeighbourLocations[4].bottom, null],
-              left: [expectedNeighbourLocations[4].left, items[0]],
+            {
+              ...expectedFittingLocations[4],
+              neighbours: {
+                top: [expectedNeighbourLocations[4].top, null],
+                right: [expectedNeighbourLocations[4].right, null],
+                bottom: [expectedNeighbourLocations[4].bottom, null],
+                left: [expectedNeighbourLocations[4].left, items[0]],
+              },
+              orientation: Orientation.WEST,
             },
-            orientation: Orientation.WEST,
-          },
-          {
-            ...expectedFittingLocations[5],
-            neighbours: {
-              top: [expectedNeighbourLocations[5].top, null],
-              right: [expectedNeighbourLocations[5].right, null],
-              bottom: [expectedNeighbourLocations[5].bottom, null],
-              left: [expectedNeighbourLocations[5].left, items[1]],
+            {
+              ...expectedFittingLocations[5],
+              neighbours: {
+                top: [expectedNeighbourLocations[5].top, null],
+                right: [expectedNeighbourLocations[5].right, null],
+                bottom: [expectedNeighbourLocations[5].bottom, null],
+                left: [expectedNeighbourLocations[5].left, items[1]],
+              },
+              orientation: Orientation.NORTH,
             },
-            orientation: Orientation.NORTH,
-          },
-          {
-            ...expectedFittingLocations[5],
-            neighbours: {
-              top: [expectedNeighbourLocations[5].top, null],
-              right: [expectedNeighbourLocations[5].right, null],
-              bottom: [expectedNeighbourLocations[5].bottom, null],
-              left: [expectedNeighbourLocations[5].left, items[1]],
+            {
+              ...expectedFittingLocations[5],
+              neighbours: {
+                top: [expectedNeighbourLocations[5].top, null],
+                right: [expectedNeighbourLocations[5].right, null],
+                bottom: [expectedNeighbourLocations[5].bottom, null],
+                left: [expectedNeighbourLocations[5].left, items[1]],
+              },
+              orientation: Orientation.EAST,
             },
-            orientation: Orientation.EAST,
-          },
-          {
-            ...expectedFittingLocations[5],
-            neighbours: {
-              top: [expectedNeighbourLocations[5].top, null],
-              right: [expectedNeighbourLocations[5].right, null],
-              bottom: [expectedNeighbourLocations[5].bottom, null],
-              left: [expectedNeighbourLocations[5].left, items[1]],
+            {
+              ...expectedFittingLocations[5],
+              neighbours: {
+                top: [expectedNeighbourLocations[5].top, null],
+                right: [expectedNeighbourLocations[5].right, null],
+                bottom: [expectedNeighbourLocations[5].bottom, null],
+                left: [expectedNeighbourLocations[5].left, items[1]],
+              },
+              orientation: Orientation.SOUTH,
             },
-            orientation: Orientation.SOUTH,
-          },
-          {
-            ...expectedFittingLocations[5],
-            neighbours: {
-              top: [expectedNeighbourLocations[5].top, null],
-              right: [expectedNeighbourLocations[5].right, null],
-              bottom: [expectedNeighbourLocations[5].bottom, null],
-              left: [expectedNeighbourLocations[5].left, items[1]],
+            {
+              ...expectedFittingLocations[5],
+              neighbours: {
+                top: [expectedNeighbourLocations[5].top, null],
+                right: [expectedNeighbourLocations[5].right, null],
+                bottom: [expectedNeighbourLocations[5].bottom, null],
+                left: [expectedNeighbourLocations[5].left, items[1]],
+              },
+              orientation: Orientation.WEST,
             },
-            orientation: Orientation.WEST,
-          },
-        ])
-      );
+          ])
+        );
+      });
+      it("When there are no fitting locations, an empty list is returned", () => {
+        const tile = {
+          top: TileEdge.BUILDING,
+          right: TileEdge.BUILDING,
+          bottom: TileEdge.BUILDING,
+          left: TileEdge.BUILDING,
+          monastary: false,
+        };
+        expect(map.getFittingLocations(tile)).toEqual([]);
+      });
     });
-    it("When there are no fitting locations, an empty list is returned", () => {
-      const tile = {
-        top: TileEdge.BUILDING,
-        right: TileEdge.BUILDING,
-        bottom: TileEdge.BUILDING,
-        left: TileEdge.BUILDING,
-        monastary: false,
-      };
-      expect(map.getFittingLocations(tile)).toEqual([]);
+    describe("And the tile fits in a few places", () => {
+      it("When there are fitting locations, the correct list is returned", () => {
+        const expectedFittingLocations = [
+          { x: 0, y: 3 },
+          { x: 1, y: 2 },
+        ];
+        const expectedNeighbourLocations = expectedFittingLocations.map(
+          getNeighbourLocations
+        );
+        const roadTile = {
+          ...blank,
+          top: TileEdge.BUILDING,
+          right: TileEdge.ROAD,
+          bottom: TileEdge.BUILDING,
+          left: TileEdge.ROAD,
+        };
+
+        const result = map.getFittingLocations(roadTile);
+        expect(result).toHaveLength(4);
+        expect(result).toEqual(
+          expect.arrayContaining([
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, items[2]],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, null],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Orientation.EAST,
+            },
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, items[2]],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, null],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Orientation.WEST,
+            },
+            {
+              ...expectedFittingLocations[1],
+              neighbours: {
+                top: [expectedNeighbourLocations[1].top, null],
+                right: [expectedNeighbourLocations[1].right, null],
+                bottom: [expectedNeighbourLocations[1].bottom, null],
+                left: [expectedNeighbourLocations[1].left, items[2]],
+              },
+              orientation: Orientation.NORTH,
+            },
+            {
+              ...expectedFittingLocations[1],
+              neighbours: {
+                top: [expectedNeighbourLocations[1].top, null],
+                right: [expectedNeighbourLocations[1].right, null],
+                bottom: [expectedNeighbourLocations[1].bottom, null],
+                left: [expectedNeighbourLocations[1].left, items[2]],
+              },
+              orientation: Orientation.SOUTH,
+            },
+          ])
+        );
+      });
+      it("When there are no fitting locations, an empty list is returned", () => {
+        const tile = {
+          top: TileEdge.BUILDING,
+          right: TileEdge.BUILDING,
+          bottom: TileEdge.BUILDING,
+          left: TileEdge.BUILDING,
+          monastary: false,
+        };
+        expect(map.getFittingLocations(tile)).toEqual([]);
+      });
+    });
+    it("And the tile fits in no places, an empty list is returned", () => {
+      expect(
+        map.getFittingLocations({
+          ...blank,
+          top: TileEdge.BUILDING,
+          right: TileEdge.BUILDING,
+          bottom: TileEdge.BUILDING,
+          left: TileEdge.BUILDING,
+        })
+      ).toEqual([]);
     });
   });
 
@@ -468,8 +555,8 @@ describe("Given I have several items set", () => {
       , , , ,
     0 , ,0, ,
       , ,1,N,
-      , ,2, ,
-      , , , ,
+      , ,2,r,
+      , ,r, ,
      */
 
     beforeEach(() => {
