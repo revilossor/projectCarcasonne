@@ -9,15 +9,8 @@ export class CartesianMap<T> {
   private _map!: Map<HashedLocation, T>;
 
   constructor() {
+    // TODO pass [Location, T][], each is hashed and set
     this._map = new Map<HashedLocation, T>();
-  }
-
-  private static locationToHash(location: Location): HashedLocation {
-    return JSON.stringify(location);
-  }
-
-  private static locationFromHash(hash: HashedLocation): Location {
-    return JSON.parse(hash);
   }
 
   public set(location: Location, value: T): CartesianMap<T> {
@@ -27,5 +20,13 @@ export class CartesianMap<T> {
 
   public get(location: Location): T | null {
     return this._map.get(CartesianMap.locationToHash(location)) ?? null;
+  }
+
+  private static locationToHash(location: Location): HashedLocation {
+    return JSON.stringify(location);
+  }
+
+  private static locationFromHash(hash: HashedLocation): Location {
+    return JSON.parse(hash);
   }
 }
