@@ -14,7 +14,6 @@ import {
 export class TileMap extends CartesianMap<Tile> {
   public getNeighbours(location: Location): Neighbours {
     const relative = TileMap.getNeighbourLocations(location);
-
     return {
       top: [relative.top, this.get(relative.top)],
       right: [relative.right, this.get(relative.right)],
@@ -33,7 +32,7 @@ export class TileMap extends CartesianMap<Tile> {
       if (
         TileMap.checkFit(
           TileMap.rotateTile(tile, orientation),
-          this.getNeighbours({ x: openLocation.x, y: openLocation.y })
+          this.getNeighbours(openLocation)
         )
       ) {
         fittingLocations.push({ ...openLocation, orientation });

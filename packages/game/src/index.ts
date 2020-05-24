@@ -1,11 +1,17 @@
 import { AUTO, Scale } from "phaser";
 import scenes from "./scenes";
-//
-// import { Tiles } from "@revilossor/core";
-// //
-// // test();
-//
-// Tiles.TileEdge.ROAD
+
+import { TileMap, Tiles } from "@revilossor/core";
+
+const map = new TileMap();
+
+map.set({ x: 0, y: 0 }, Tiles.blank);
+
+console.dir({
+  map,
+  tile: Tiles.blank,
+  positions: map.getFittingLocations(Tiles.blank),
+});
 
 new Phaser.Game({
   type: AUTO,
