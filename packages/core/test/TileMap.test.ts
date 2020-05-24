@@ -40,6 +40,7 @@ describe("Given I have several items set", () => {
     blank,
     { ...blank, bottom: TileEdge.ROAD, right: TileEdge.ROAD },
   ];
+
   beforeEach(() => {
     map = new TileMap();
     items.forEach((item, y) => {
@@ -47,7 +48,7 @@ describe("Given I have several items set", () => {
     });
   });
 
-  it("When I get the neighbours location, the correct Neighbours are returned", () => {
+  it("When I get the neighbours for a location, the correct list is returned", () => {
     const populatedLocations = [
       { x: 0, y: 0 },
       { x: 0, y: 1 },
@@ -169,6 +170,8 @@ describe("Given I have several items set", () => {
     );
   });
 
+  it("When I check if a tile fits, it returns correctly", () => {});
+
   describe("Given I then add another tile, neighbouring those already populated", () => {
     const newLocation = { x: 1, y: 1 };
 
@@ -185,7 +188,7 @@ describe("Given I have several items set", () => {
       map.set(newLocation, blank);
     });
 
-    it("When I get the neighbours of the newly populated location, the correct Neighbours are returned", () => {
+    it("When I get the neighbours of the newly populated location, the correct list is returned", () => {
       expect(map.getNeighbours(newLocation)).toEqual({
         top: [{ x: 1, y: 0 }, null],
         right: [{ x: 2, y: 1 }, null],

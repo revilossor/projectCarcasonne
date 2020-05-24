@@ -28,3 +28,10 @@ export type HashedLocation = string;
 export interface OpenLocation extends Location {
   neighbours: Neighbours;
 }
+
+export enum Orientation {
+  NORTH = "north",
+  EAST = "east",
+  SOUTH = "south",
+  WEST = "west",
+}

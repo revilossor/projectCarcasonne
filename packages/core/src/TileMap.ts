@@ -1,5 +1,12 @@
 import { CartesianMap } from "./CartesianMap";
-import { Tile, Neighbours, Location, OpenLocation, Proximity } from "./tiles";
+import {
+  Tile,
+  Neighbours,
+  Location,
+  OpenLocation,
+  Proximity,
+  Orientation,
+} from "./tiles";
 
 export class TileMap extends CartesianMap<Tile> {
   public getNeighbours(location: Location): Neighbours {
@@ -11,6 +18,34 @@ export class TileMap extends CartesianMap<Tile> {
       bottom: [relative.bottom, this.get(relative.bottom)],
       left: [relative.left, this.get(relative.left)],
     };
+  }
+
+  // TODO get the list of openLocations where a particular tile can be placed...
+  // checkFit(location, tile, orientation): boolean
+  /**
+      for tile
+        for each open position
+          check if fits, in each of the 4 orientations
+            if an orientation fits this open location
+              add to list
+      return list
+   */
+
+  public checkFit(
+    location: Location,
+    tile: Tile,
+    orientation: Orientation = Orientation.NORTH
+  ): boolean {
+    /**
+      rotate the tile to orientation      // rotate(Tile, orientation):Tile
+      getNeighbours for location
+      for each rotated tile edge      // validateEdge(Tile, neighbours, orientation): boolean
+        check if tile edge valid connection with correcponding neighbour edge
+      if each tile edge valid
+        return true
+      return false
+     */
+    return false;
   }
 
   public getOpenLocations(): OpenLocation[] {
@@ -53,5 +88,36 @@ export class TileMap extends CartesianMap<Tile> {
       bottom: { x, y: y + 1 },
       left: { x: x - 1, y },
     };
+  }
+
+  private static rotateTile(tile: Tile, orientation: Orientation): Tile {
+    switch (orientation) {
+      case Orientation.EAST:
+        return {
+          top: tile.left,
+          right: tile.top,
+          bottom: tile.right,
+          left: tile.bottom,
+          monastary: tile.monastary,
+        };
+      case Orientation.SOUTH:
+        return {
+          top: tile.bottom,
+          right: tile.left,
+          bottom: tile.top,
+          left: tile.right,
+          monastary: tile.monastary,
+        };
+      case Orientation.WEST:
+        return {
+          top: tile.right,
+          right: tile.bottom,
+          bottom: tile.left,
+          left: tile.top,
+          monastary: tile.monastary,
+        };
+      default:
+        return tile;
+    }
   }
 }
