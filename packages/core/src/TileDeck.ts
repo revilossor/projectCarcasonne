@@ -29,7 +29,6 @@ export class TileDeck {
   }
 
   public draw(): Tile | null {
-    // TODO test meeeeee
     return this._list.pop() ?? null;
   }
 

@@ -1,4 +1,4 @@
-import { TileDeck, Tiles } from "../src";
+import { TileDeck, Tiles, Types } from "../src";
 
 let deck: TileDeck;
 
@@ -17,6 +17,39 @@ describe("Given I have 100 blank tiles", () => {
   it("Then there should be 100 blank tiles in the deck", () => {
     expect(deck).toHaveLength(100);
     deck.forEach((item) => expect(item).toEqual(Tiles.blank));
+  });
+
+  describe("When I draw a tile", () => {
+    let tile: Types.Tile | null;
+
+    beforeEach(() => {
+      tile = deck.draw();
+    });
+
+    it("Then it is a blank tile", () => {
+      expect(tile).toBe(Tiles.blank);
+    });
+
+    it("And there should be 99 blank tiles in the deck", () => {
+      expect(deck).toHaveLength(99);
+      deck.forEach((item) => expect(item).toEqual(Tiles.blank));
+    });
+  });
+
+  describe("When I have drawn all the tiles", () => {
+    beforeEach(() => {
+      for (let i = 0; i < 100; i++) {
+        deck.draw();
+      }
+    });
+
+    it("Then there should be no tiles left in the deck", () => {
+      expect(deck).toHaveLength(0);
+    });
+
+    it("When I draw a tile, it returns null", () => {
+      expect(deck.draw()).toBeNull();
+    });
   });
 });
 
@@ -63,5 +96,5 @@ describe("Given I have 50 blank and 50 monastary tiles", () => {
   });
 });
 
-// TODO draw, export items somehow, export list of drawn things
+// TODO export items somehow, export list of drawn things
 // TODO get places i can put a meeple on a tile...
