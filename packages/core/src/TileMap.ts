@@ -14,7 +14,7 @@ import {
 export class TileMap extends CartesianMap<Tile> {
   public setTile(tile: Tile, fittingLocation: FittingLocation): TileMap {
     this.set(
-      fittingLocation,
+      { x: fittingLocation.x, y: fittingLocation.y },
       TileMap.rotateTile(tile, fittingLocation.orientation)
     );
     return this;

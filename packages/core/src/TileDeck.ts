@@ -1,4 +1,5 @@
 import { Tile } from "./Types";
+import { carcassonne } from "./tiles";
 
 interface TileDeckItem {
   tile: Tile;
@@ -17,7 +18,13 @@ export class TileDeck {
   }
 
   public static carcassonne(): TileDeck {
-    return new TileDeck({ items: [] }); // TODO use carcassonne tiles, hardcode counts here
+    const tileCount = [3, 3, 3, 5, 3, 2, 3, 5, 5, 3, 4, 3, 1, 8, 9, 4, 1, 4, 2];
+    return TileDeck.fromParameters({
+      items: tileCount.map((count, index) => ({
+        tile: { ...carcassonne[`${index}`] },
+        count,
+      })),
+    });
   }
 
   public static fromParameters(parameters: TileDeckParameters): TileDeck {
@@ -41,7 +48,8 @@ export class TileDeck {
   }
 
   public draw(): Tile | null {
-    return this._list.pop() ?? null;
+    const drawn = this._list.pop() ?? null;
+    return drawn ? { ...drawn } : null;
   }
 
   public get length(): number {

@@ -41,7 +41,7 @@ describe("Given I have a deck with 100 blank tiles", () => {
     });
 
     it("Then it is a blank tile", () => {
-      expect(tile).toBe(Tiles.blank);
+      expect(tile).toEqual(Tiles.blank);
     });
 
     it("And there should be 99 blank tiles in the deck", () => {
@@ -107,5 +107,22 @@ describe("Given I have a deck with 50 blank and 50 monastary tiles", () => {
       expect(deck.filter((item) => item === Tiles.blank)).toHaveLength(50);
       expect(deck.filter((item) => item === monastary)).toHaveLength(50);
     });
+  });
+});
+
+describe("Given I have the carcassonne set", () => {
+  beforeEach(() => {
+    deck = TileDeck.carcassonne();
+  });
+
+  it("Then there should be 71 tiles in the deck", () => {
+    expect(deck).toHaveLength(71);
+  });
+
+  it("When I have drawn all the tiles, then I draw null", () => {
+    while (deck.length > 0) {
+      expect(deck.draw()).not.toBeNull();
+    }
+    expect(deck.draw()).toBeNull();
   });
 });
