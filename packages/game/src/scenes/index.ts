@@ -1,5 +1,5 @@
-import { MenuScene } from "./MenuScene";
+import { MainScene } from "./MainScene";
 
-const scenes = [MenuScene];
+const scenes = [MainScene];
 
 export default scenes;
