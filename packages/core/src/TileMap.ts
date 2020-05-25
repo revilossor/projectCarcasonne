@@ -11,10 +11,6 @@ import {
   FittingLocation,
 } from "./Types";
 
-/** TODO
-  - add the carcasonne tiles, in the correct ratios
- */
-
 export class TileMap extends CartesianMap<Tile> {
   public setTile(tile: Tile, fittingLocation: FittingLocation): TileMap {
     this.set(

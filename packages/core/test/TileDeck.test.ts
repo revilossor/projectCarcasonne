@@ -2,7 +2,21 @@ import { TileDeck, Tiles, Types } from "../src";
 
 let deck: TileDeck;
 
-describe("Given I have 100 blank tiles", () => {
+describe("Given I have a blank deck", () => {
+  beforeEach(() => {
+    deck = TileDeck.empty();
+  });
+
+  it("Then there should be no tiles in the deck", () => {
+    expect(deck).toHaveLength(0);
+  });
+
+  it("When I draw a tile, then it returns null", () => {
+    expect(deck.draw()).toBeNull();
+  });
+});
+
+describe("Given I have a deck with 100 blank tiles", () => {
   const items = [
     {
       tile: Tiles.blank,
@@ -11,7 +25,7 @@ describe("Given I have 100 blank tiles", () => {
   ];
 
   beforeEach(() => {
-    deck = new TileDeck({ items });
+    deck = TileDeck.fromParameters({ items });
   });
 
   it("Then there should be 100 blank tiles in the deck", () => {
@@ -53,7 +67,7 @@ describe("Given I have 100 blank tiles", () => {
   });
 });
 
-describe("Given I have 50 blank and 50 monastary tiles", () => {
+describe("Given I have a deck with 50 blank and 50 monastary tiles", () => {
   const monastary = { ...Tiles.blank, monastary: true };
 
   const items = [
@@ -68,7 +82,7 @@ describe("Given I have 50 blank and 50 monastary tiles", () => {
   ];
 
   beforeEach(() => {
-    deck = new TileDeck({ items });
+    deck = TileDeck.fromParameters({ items });
   });
 
   it("Then there should be 50 blank and 50 monastary tiles in the deck, in order", () => {

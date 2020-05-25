@@ -12,7 +12,19 @@ export interface TileDeckParameters {
 export class TileDeck {
   private _list = new Array<Tile>();
 
-  public constructor(public parameters: TileDeckParameters) {
+  public static empty(): TileDeck {
+    return new TileDeck({ items: [] });
+  }
+
+  public static carcassonne(): TileDeck {
+    return new TileDeck({ items: [] }); // TODO use carcassonne tiles, hardcode counts here
+  }
+
+  public static fromParameters(parameters: TileDeckParameters): TileDeck {
+    return new TileDeck(parameters);
+  }
+
+  private constructor(public parameters: TileDeckParameters) {
     parameters.items.forEach(({ tile, count }: TileDeckItem) => {
       for (let i = 0; i < count; i++) {
         this._list.push(tile);
