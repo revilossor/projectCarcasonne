@@ -11,15 +11,18 @@ import {
   FittingLocation,
 } from "./Types";
 
+/** TODO
+  - add the carcasonne tiles, in the correct ratios
+  - some class that manages tiles in stack; draw random, shuffle etc
+ */
+
 export class TileMap extends CartesianMap<Tile> {
-  public getNeighbours(location: Location): Neighbours {
-    const relative = TileMap.getNeighbourLocations(location);
-    return {
-      top: [relative.top, this.get(relative.top)],
-      right: [relative.right, this.get(relative.right)],
-      bottom: [relative.bottom, this.get(relative.bottom)],
-      left: [relative.left, this.get(relative.left)],
-    };
+  public setTile(tile: Tile, fittingLocation: FittingLocation): TileMap {
+    this.set(
+      fittingLocation,
+      TileMap.rotateTile(tile, fittingLocation.orientation)
+    );
+    return this;
   }
 
   public getFittingLocations(tile: Tile): FittingLocation[] {
@@ -63,12 +66,12 @@ export class TileMap extends CartesianMap<Tile> {
   public getOpenLocations(): OpenLocation[] {
     const addOpenLocation = (
       list: OpenLocation[],
-      tuple: [Location, Tile | null]
+      [location, tile]: [Location, Tile | null]
     ) => {
-      if (tuple[1] === null) {
+      if (tile === null) {
         list.push({
-          ...tuple[0],
-          neighbours: this.getNeighbours(tuple[0]),
+          ...location,
+          neighbours: this.getNeighbours(location),
         });
       }
     };
@@ -87,6 +90,16 @@ export class TileMap extends CartesianMap<Tile> {
       },
       []
     );
+  }
+
+  public getNeighbours(location: Location): Neighbours {
+    const relative = TileMap.getNeighbourLocations(location);
+    return {
+      top: [relative.top, this.get(relative.top)],
+      right: [relative.right, this.get(relative.right)],
+      bottom: [relative.bottom, this.get(relative.bottom)],
+      left: [relative.left, this.get(relative.left)],
+    };
   }
 
   private static getNeighbourLocations({

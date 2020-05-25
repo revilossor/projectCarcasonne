@@ -524,7 +524,7 @@ describe("Given I have several items set", () => {
     });
   });
 
-  describe("Given I then add another tile, neighbouring those already populated", () => {
+  describe("Given I then set another tile, neighbouring those already populated", () => {
     const newLocation = { x: 1, y: 1 };
 
     /**
