@@ -95,5 +95,3 @@ describe("Given I have 50 blank and 50 monastary tiles", () => {
     });
   });
 });
-
-// TODO export list of drawn things
