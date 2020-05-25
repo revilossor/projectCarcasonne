@@ -13,7 +13,6 @@ import {
 
 /** TODO
   - add the carcasonne tiles, in the correct ratios
-  - some class that manages tiles in stack; draw random, shuffle etc
  */
 
 export class TileMap extends CartesianMap<Tile> {
@@ -142,7 +141,13 @@ export class TileMap extends CartesianMap<Tile> {
           monastary: tile.monastary,
         };
       default:
-        return tile;
+        return {
+          top: tile.top,
+          right: tile.right,
+          bottom: tile.bottom,
+          left: tile.left,
+          monastary: tile.monastary,
+        };
     }
   }
 
