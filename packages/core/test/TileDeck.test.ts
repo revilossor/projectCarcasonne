@@ -96,5 +96,4 @@ describe("Given I have 50 blank and 50 monastary tiles", () => {
   });
 });
 
-// TODO export items somehow, export list of drawn things
-// TODO get places i can put a meeple on a tile...
+// TODO export list of drawn things

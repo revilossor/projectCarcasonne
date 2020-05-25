@@ -12,8 +12,8 @@ export interface TileDeckParameters {
 export class TileDeck {
   private _list = new Array<Tile>();
 
-  public constructor({ items }: TileDeckParameters) {
-    items.forEach(({ tile, count }: TileDeckItem) => {
+  public constructor(public parameters: TileDeckParameters) {
+    parameters.items.forEach(({ tile, count }: TileDeckItem) => {
       for (let i = 0; i < count; i++) {
         this._list.push(tile);
       }
