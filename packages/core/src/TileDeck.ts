@@ -13,7 +13,7 @@ export class TileDeck extends Array {
   constructor({ items }: TileDeckParameters) {
     super();
     items.forEach(({ tile, count }: TileDeckItem) => {
-      for (let i = count; i > 0; --i) {
+      for (let i = 0; i < count; i++) {
         this.push(tile);
       }
     });
