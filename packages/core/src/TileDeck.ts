@@ -17,6 +17,8 @@ export class TileDeck {
     return new TileDeck({ items: [] });
   }
 
+  // TODO shuffle tile back in..
+
   public static carcassonne(): TileDeck {
     const tileCount = [3, 3, 3, 5, 3, 2, 3, 5, 5, 3, 4, 3, 1, 8, 9, 4, 1, 4, 2];
     return TileDeck.fromParameters({
