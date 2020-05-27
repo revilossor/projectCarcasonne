@@ -1,33 +1,6 @@
 {
-  "name": "@revilossor/carcasonnelike",
-  "version": "0.0.0",
-  "description": "carcasonnelike",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/revilossor/projectCarcasonne.git"
-  },
-  "license": "SEE LICENCE IN LICENCE",
   "author": "oliver.ross@hotmail.com",
-  "scripts": {
-    "build": "lerna run build --stream --parallel",
-    "postinstall": "lerna bootstrap",
-    "start": ". scripts/start.sh",
-    "stop": ". scripts/stop.sh",
-    "test": "jest",
-    "version": "lerna version --conventional-commits --no-changelog --no-push --yes"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "npm test"
-    }
-  },
-  "jest": {
-    "collectCoverage": false,
-    "preset": "ts-jest",
-    "restoreMocks": true
-  },
+  "description": "carcasonnelike",
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
@@ -42,5 +15,31 @@
     "sort-package-json": "^1.27.0",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "jest": {
+    "collectCoverage": false,
+    "preset": "ts-jest",
+    "restoreMocks": true
+  },
+  "license": "SEE LICENCE IN LICENCE",
+  "name": "@revilossor/carcasonnelike",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/revilossor/projectCarcasonne.git"
+  },
+  "scripts": {
+    "build": "lerna run build --stream --parallel",
+    "postinstall": "lerna bootstrap",
+    "start": ". scripts/start.sh",
+    "test": "jest",
+    "version": "lerna version --conventional-commits --no-changelog --no-push --yes"
+  },
+  "version": "0.0.0"
 }
