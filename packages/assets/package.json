@@ -1,0 +1,16 @@
+{
+  "name": "@revilossor/assets",
+  "version": "0.0.0",
+  "description": "game assets",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/revilossor/projectCarcasonne.git"
+  },
+  "license": "SEE LICENCE IN LICENCE",
+  "author": "Oliver Ross <oliver.ross@hotmail.com>",
+  "scripts": {
+    "prestart": "docker build -t revilossor-assets .",
+    "start": "docker run --name revilossor-assets -p 1233:80 -d revilossor-assets",
+    "stop": "docker stop $(docker ps -q --filter name=revilossor-assets) | xargs docker rm"
+  }
+}

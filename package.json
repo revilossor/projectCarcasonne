@@ -11,7 +11,8 @@
   "scripts": {
     "build": "lerna run build --stream --parallel",
     "postinstall": "lerna bootstrap",
-    "start": "npm --prefix packages/game start",
+    "start": ". scripts/start.sh",
+    "stop": ". scripts/stop.sh",
     "test": "jest",
     "version": "lerna version --conventional-commits --no-changelog --no-push --yes"
   },

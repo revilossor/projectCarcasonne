@@ -6,6 +6,9 @@ new Phaser.Game({
   backgroundColor: "0xff00ff",
   width: 256,
   height: 192,
+  loader: {
+    baseURL: "https://localhost:1233",
+  },
   scale: {
     mode: Scale.FIT,
     autoCenter: Scale.CENTER_BOTH,
