@@ -3,6 +3,7 @@ import { TileMap, TileDeck, Tiles } from "@revilossor/core";
 
 const TILE_WIDTH = 8;
 const TILE_HEIGHT = 8;
+const TILE_SPRITE_KEY = "tiles";
 
 export class MainScene extends Scene {
   private _map: TileMap;
@@ -13,7 +14,13 @@ export class MainScene extends Scene {
     super("MainScene");
   }
 
-  preload() {}
+  preload() {
+    this.load.image(
+      TILE_SPRITE_KEY,
+      "images/carcassonne-tiles.png"
+      // { frameWidth: TILE_WIDTH, frameHeight: TILE_HEIGHT }
+    );
+  }
 
   private initMap() {
     this._map = new TileMap();
@@ -60,6 +67,8 @@ export class MainScene extends Scene {
       callbackScope: this,
       loop: true,
     });
+
+    this.add.image(10, 10, TILE_SPRITE_KEY);
   }
 
   update(time: number, delta: number) {

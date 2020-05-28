@@ -6,8 +6,15 @@ new Phaser.Game({
   backgroundColor: "0xff00ff",
   width: 256,
   height: 192,
+  render: {
+    antialias: false,
+    pixelArt: true,
+    roundPixels: true,
+  },
+  zoom: 4,
   loader: {
-    baseURL: "https://localhost:1233",
+    baseURL: "http://localhost:1233",
+    crossOrigin: "anonymous",
   },
   scale: {
     mode: Scale.FIT,
