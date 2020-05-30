@@ -149,6 +149,7 @@ export class TileMap extends CartesianMap<Tile> {
     return {
       ...tile,
       ...edges,
+      orientation,
     };
   }
 

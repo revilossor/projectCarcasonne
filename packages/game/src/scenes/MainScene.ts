@@ -31,7 +31,7 @@ export class MainScene extends Scene {
 
   private drawMap() {
     this._graphics.fillStyle(0x00ff00, 1);
-    this._map.all.forEach(([location, tile]) => {
+    this._map.all.forEach(([location, _]) => {
       this._graphics.fillRect(
         location.x * TILE_WIDTH + 256 / 2 - TILE_WIDTH / 2,
         location.y * TILE_HEIGHT + 192 / 2 - TILE_HEIGHT / 2,

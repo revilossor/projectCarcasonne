@@ -1,6 +1,6 @@
 import { TileComponent, Tile } from "../Types";
 
-// TODO export tiles here, ratios in static TileDeck factory
+// TODO update me for new model
 export const carcassonne: { [key: string]: Tile } = {
   // start: {
   //   top: TileComponent.BUILDING,
