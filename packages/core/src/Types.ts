@@ -1,4 +1,4 @@
-export enum TileEdge {
+export enum TileComponent {
   ROAD = "road",
   BUILDING = "building",
   EMPTY = "empty",
@@ -14,8 +14,8 @@ export interface Proximity<T> {
   left: T;
 }
 
-export interface Tile extends Proximity<TileEdge> {
-  middle: TileEdge;
+export interface Tile extends Proximity<TileComponent> {
+  middle: TileComponent;
   index?: number;
   orientation?: Orientation;
 }

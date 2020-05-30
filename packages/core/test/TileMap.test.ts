@@ -39,8 +39,8 @@ describe("Given I have one item set", () => {
   const items: Types.Tile[] = [
     {
       ...Tiles.blank,
-      bottom: Types.TileEdge.ROAD,
-      middle: Types.TileEdge.TOWN,
+      bottom: Types.TileComponent.ROAD,
+      middle: Types.TileComponent.TOWN,
     },
   ];
 
@@ -59,11 +59,11 @@ describe("Given I have one item set", () => {
           getNeighbourLocations
         );
         const roadTile = {
-          top: Types.TileEdge.ROAD,
-          right: Types.TileEdge.BUILDING,
-          bottom: Types.TileEdge.BUILDING,
-          left: Types.TileEdge.BUILDING,
-          middle: Types.TileEdge.BUILDING,
+          top: Types.TileComponent.ROAD,
+          right: Types.TileComponent.BUILDING,
+          bottom: Types.TileComponent.BUILDING,
+          left: Types.TileComponent.BUILDING,
+          middle: Types.TileComponent.BUILDING,
         };
 
         const result = map.getFittingLocations(roadTile);
@@ -100,9 +100,13 @@ describe("Given I have several items set", () => {
    */
 
   const items: Types.Tile[] = [
-    { ...Tiles.blank, middle: Types.TileEdge.MONASTARY },
+    { ...Tiles.blank, middle: Types.TileComponent.MONASTARY },
     Tiles.blank,
-    { ...Tiles.blank, bottom: Types.TileEdge.ROAD, right: Types.TileEdge.ROAD },
+    {
+      ...Tiles.blank,
+      bottom: Types.TileComponent.ROAD,
+      right: Types.TileComponent.ROAD,
+    },
   ];
 
   beforeEach(() => {
@@ -512,11 +516,11 @@ describe("Given I have several items set", () => {
           getNeighbourLocations
         );
         const roadTile = {
-          top: Types.TileEdge.BUILDING,
-          right: Types.TileEdge.ROAD,
-          bottom: Types.TileEdge.BUILDING,
-          left: Types.TileEdge.ROAD,
-          middle: Types.TileEdge.TOWN,
+          top: Types.TileComponent.BUILDING,
+          right: Types.TileComponent.ROAD,
+          bottom: Types.TileComponent.BUILDING,
+          left: Types.TileComponent.ROAD,
+          middle: Types.TileComponent.TOWN,
         };
 
         const result = map.getFittingLocations(roadTile);
@@ -571,11 +575,11 @@ describe("Given I have several items set", () => {
       it("Then an empty list is returned", () => {
         expect(
           map.getFittingLocations({
-            top: Types.TileEdge.BUILDING,
-            right: Types.TileEdge.BUILDING,
-            bottom: Types.TileEdge.BUILDING,
-            left: Types.TileEdge.BUILDING,
-            middle: Types.TileEdge.BUILDING,
+            top: Types.TileComponent.BUILDING,
+            right: Types.TileComponent.BUILDING,
+            bottom: Types.TileComponent.BUILDING,
+            left: Types.TileComponent.BUILDING,
+            middle: Types.TileComponent.BUILDING,
           })
         ).toEqual([]);
       });

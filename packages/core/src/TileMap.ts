@@ -7,7 +7,7 @@ import {
   Proximity,
   Orientation,
   Direction,
-  TileEdge,
+  TileComponent,
   FittingLocation,
 } from "./Types";
 
@@ -155,16 +155,16 @@ export class TileMap extends CartesianMap<Tile> {
   private static getCorrespondingEdge(
     neighbours: Neighbours,
     direction: Direction
-  ): TileEdge {
+  ): TileComponent {
     switch (direction) {
       case Direction.TOP:
-        return neighbours?.top[1]?.bottom ?? TileEdge.UNOCCUPIED;
+        return neighbours?.top[1]?.bottom ?? TileComponent.UNOCCUPIED;
       case Direction.RIGHT:
-        return neighbours?.right[1]?.left ?? TileEdge.UNOCCUPIED;
+        return neighbours?.right[1]?.left ?? TileComponent.UNOCCUPIED;
       case Direction.BOTTOM:
-        return neighbours?.bottom[1]?.top ?? TileEdge.UNOCCUPIED;
+        return neighbours?.bottom[1]?.top ?? TileComponent.UNOCCUPIED;
       case Direction.LEFT:
-        return neighbours?.left[1]?.right ?? TileEdge.UNOCCUPIED;
+        return neighbours?.left[1]?.right ?? TileComponent.UNOCCUPIED;
     }
   }
 
@@ -178,7 +178,7 @@ export class TileMap extends CartesianMap<Tile> {
       direction
     );
     return (
-      correspondingEdge === TileEdge.UNOCCUPIED ||
+      correspondingEdge === TileComponent.UNOCCUPIED ||
       tile[direction] === correspondingEdge
     );
   }
