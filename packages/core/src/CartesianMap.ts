@@ -5,12 +5,10 @@ export class CartesianMap<T> {
   private _map!: Map<HashedLocation, T>;
 
   constructor() {
-    // TODO pass [Location, T][], each is hashed and set
     this._map = new Map<HashedLocation, T>();
   }
 
   public set(location: Location, value: T): CartesianMap<T> {
-    // TODO enforce integer locations...
     this._map.set(CartesianMap.locationToHash(location), value);
     return this;
   }

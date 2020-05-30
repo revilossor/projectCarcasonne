@@ -599,7 +599,7 @@ describe("Given I have several items set", () => {
      */
 
     beforeEach(() => {
-      map.set(newLocation, Tiles.blank);
+      map.set(newLocation, Tiles.blank); // TODO this should use setTile, with a fittingLocation, test orientation is set
     });
 
     it("When I get the neighbours of the newly populated location, the correct list is returned", () => {
