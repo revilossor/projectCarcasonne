@@ -2,6 +2,18 @@ import { TileMap, Tiles, Types } from "../src";
 
 let map: TileMap;
 
+const getNeighbourLocations = ({
+  x,
+  y,
+}: Types.Location): Types.Proximity<Types.Location> => {
+  return {
+    top: { x, y: y - 1 },
+    right: { x: x + 1, y },
+    bottom: { x, y: y + 1 },
+    left: { x: x - 1, y },
+  };
+};
+
 describe("Given I have no items set", () => {
   beforeEach(() => {
     map = new TileMap();
@@ -13,6 +25,65 @@ describe("Given I have no items set", () => {
 
   it("And I get fitting locations for a tile, an empty list is returned", () => {
     expect(map.getFittingLocations(Tiles.blank)).toEqual([]);
+  });
+});
+
+describe("Given I have one item set", () => {
+  /**
+       0
+    , , , ,
+  0 , ,0, ,
+    , ,r, ,
+   */
+
+  const items: Types.Tile[] = [
+    {
+      ...Tiles.blank,
+      bottom: Types.TileEdge.ROAD,
+      middle: Types.TileEdge.TOWN,
+    },
+  ];
+
+  beforeEach(() => {
+    map = new TileMap();
+    items.forEach((item, y) => {
+      map.set({ x: 0, y }, item);
+    });
+  });
+
+  describe("And I get fitting locations for a tile", () => {
+    describe("And the tile fits in one place in one orientation", () => {
+      it("Then the correct list is returned", () => {
+        const expectedFittingLocations = [{ x: 0, y: 1 }];
+        const expectedNeighbourLocations = expectedFittingLocations.map(
+          getNeighbourLocations
+        );
+        const roadTile = {
+          top: Types.TileEdge.ROAD,
+          right: Types.TileEdge.BUILDING,
+          bottom: Types.TileEdge.BUILDING,
+          left: Types.TileEdge.BUILDING,
+          middle: Types.TileEdge.BUILDING,
+        };
+
+        const result = map.getFittingLocations(roadTile);
+        expect(result).toHaveLength(1);
+        expect(result).toEqual(
+          expect.arrayContaining([
+            {
+              ...expectedFittingLocations[0],
+              neighbours: {
+                top: [expectedNeighbourLocations[0].top, items[0]],
+                right: [expectedNeighbourLocations[0].right, null],
+                bottom: [expectedNeighbourLocations[0].bottom, null],
+                left: [expectedNeighbourLocations[0].left, null],
+              },
+              orientation: Types.Orientation.NORTH,
+            },
+          ])
+        );
+      });
+    });
   });
 });
 
@@ -28,21 +99,8 @@ describe("Given I have several items set", () => {
     positive y is down!
    */
 
-  const getNeighbourLocations = ({
-    x,
-    y,
-  }: Types.Location): Types.Proximity<Types.Location> => {
-    // assume all locations are integers, and positive y is down...
-    return {
-      top: { x, y: y - 1 },
-      right: { x: x + 1, y },
-      bottom: { x, y: y + 1 },
-      left: { x: x - 1, y },
-    };
-  };
-
   const items: Types.Tile[] = [
-    { ...Tiles.blank, monastary: true },
+    { ...Tiles.blank, middle: Types.TileEdge.MONASTARY },
     Tiles.blank,
     { ...Tiles.blank, bottom: Types.TileEdge.ROAD, right: Types.TileEdge.ROAD },
   ];
@@ -458,7 +516,7 @@ describe("Given I have several items set", () => {
           right: Types.TileEdge.ROAD,
           bottom: Types.TileEdge.BUILDING,
           left: Types.TileEdge.ROAD,
-          monastary: false,
+          middle: Types.TileEdge.TOWN,
         };
 
         const result = map.getFittingLocations(roadTile);
@@ -517,7 +575,7 @@ describe("Given I have several items set", () => {
             right: Types.TileEdge.BUILDING,
             bottom: Types.TileEdge.BUILDING,
             left: Types.TileEdge.BUILDING,
-            monastary: false,
+            middle: Types.TileEdge.BUILDING,
           })
         ).toEqual([]);
       });

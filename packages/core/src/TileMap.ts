@@ -36,7 +36,6 @@ export class TileMap extends CartesianMap<Tile> {
         fittingLocations.push({ ...openLocation, orientation });
       }
     };
-
     return this.getOpenLocations().reduce(
       (
         fittingLocations: FittingLocation[],
@@ -48,6 +47,7 @@ export class TileMap extends CartesianMap<Tile> {
           openLocation,
           tile
         );
+
         addFittingLocationToList(Orientation.NORTH);
         addFittingLocationToList(Orientation.EAST);
         addFittingLocationToList(Orientation.SOUTH);
@@ -111,40 +111,45 @@ export class TileMap extends CartesianMap<Tile> {
   }
 
   private static rotateTile(tile: Tile, orientation: Orientation): Tile {
+    let edges: Partial<Tile>;
     switch (orientation) {
       case Orientation.EAST:
-        return {
+        edges = {
           top: tile.left,
           right: tile.top,
           bottom: tile.right,
           left: tile.bottom,
-          monastary: tile.monastary,
         };
+        break;
       case Orientation.SOUTH:
-        return {
+        edges = {
           top: tile.bottom,
           right: tile.left,
           bottom: tile.top,
           left: tile.right,
-          monastary: tile.monastary,
         };
+        break;
       case Orientation.WEST:
-        return {
+        edges = {
           top: tile.right,
           right: tile.bottom,
           bottom: tile.left,
           left: tile.top,
-          monastary: tile.monastary,
         };
+        break;
       default:
-        return {
+        edges = {
           top: tile.top,
           right: tile.right,
           bottom: tile.bottom,
           left: tile.left,
-          monastary: tile.monastary,
         };
+        break;
     }
+    return {
+      ...tile,
+      ...edges,
+    };
   }
 
   private static getCorrespondingEdge(

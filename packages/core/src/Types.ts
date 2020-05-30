@@ -3,6 +3,8 @@ export enum TileEdge {
   BUILDING = "building",
   EMPTY = "empty",
   UNOCCUPIED = "unoccupied",
+  MONASTARY = "monastary",
+  TOWN = "town",
 }
 
 export interface Proximity<T> {
@@ -13,7 +15,9 @@ export interface Proximity<T> {
 }
 
 export interface Tile extends Proximity<TileEdge> {
-  monastary: boolean;
+  middle: TileEdge;
+  index?: number;
+  orientation?: Orientation;
 }
 
 export interface Neighbours extends Proximity<[Location, Tile | null]> {}

@@ -5,5 +5,5 @@ export const blank = {
   right: TileEdge.EMPTY,
   bottom: TileEdge.EMPTY,
   left: TileEdge.EMPTY,
-  monastary: false,
+  middle: TileEdge.EMPTY,
 };
